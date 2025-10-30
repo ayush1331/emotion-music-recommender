@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emotion Music Recommender</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"
+    ></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="app__header">
+        <h1>Emotion Music Recommender</h1>
+        <p>Let your mood pick the music.</p>
+      </header>
+
+      <main class="app__main">
+        <section class="detector" aria-label="Emotion detector">
+          <div class="detector__video-wrapper">
+            <video id="video" playsinline autoplay muted></video>
+            <div id="emoji-overlay" class="detector__emoji">🙂</div>
+            <div class="detector__label">
+              <span id="emotion-label">No face detected</span>
+            </div>
+          </div>
+
+          <div class="detector__controls">
+            <button id="start-btn" class="btn btn--primary">Start Camera</button>
+            <button id="capture-btn" class="btn btn--secondary" disabled>
+              Capture Emotion
+            </button>
+            <button id="stop-btn" class="btn btn--ghost" disabled>Stop Camera</button>
+          </div>
+
+          <div id="status-indicator" class="status-badge">
+          </div>
+
+          <p class="detector__note">
+            Tip: good lighting improves detection accuracy.
+          </p>
+        </section>
+
+        <section class="recommendations" aria-live="polite">
+          <div class="card">
+            <form id="spotify-form" class="spotify-form">
+              <h2>Spotify API Setup</h2>
+              <p>
+                Demo use only. Credentials are held in memory—do not share this build
+                publicly.
+              </p>
+
+              <label class="spotify-form__field">
+                <span>Client ID</span>
+                <input
+                  id="spotify-client-id"
+                  name="clientId"
+                  type="text"
+                  autocomplete="off"
+                  required
+                  placeholder="Your Spotify client ID"
+                />
+              </label>
+
+              <label class="spotify-form__field">
+                <span>Client Secret</span>
+                <input
+                  id="spotify-client-secret"
+                  name="clientSecret"
+                  type="password"
+                  autocomplete="off"
+                  required
+                  placeholder="Your Spotify client secret"
+                />
+              </label>
+
+              <button type="submit" class="btn btn--primary">Connect</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <h2>Recommended Tracks</h2>
+              <span id="current-emotion-chip" class="chip chip--muted"
+                >Waiting for camera…</span
+              >
+            </div>
+
+            <div id="tracks-container" class="tracks-list tracks-list--empty">
+              <p>Connect to Spotify and face the camera to see recommendations.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app__footer">
+        <span>Powered by face-api.js and the Spotify Web API.</span>
+      </footer>
+    </div>
+  </body>
+</html>
